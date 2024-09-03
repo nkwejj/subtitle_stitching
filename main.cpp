@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<vector>
 #include<cstring>
 #include<map>
@@ -194,24 +194,24 @@ void mystitch(string left, string right, Rect roi, bool processed = false) {
 	}
 	sort(vec.begin(), vec.end(), [](pair<double, int>a, pair<double, int>b) {return a.second > b.second; });
 
-	/*==========判断是否为滚动字幕===========*/
-	if (vec.size() == 0 || vec[0].second < 60) {
-		//根据相似点匹配数量进行判断
-		cout << endl;
-		cout << "=================================" << endl;
-		cout << "           不是滚动字幕" << endl;
-		cout << "=================================" << endl;
-		Mat res;
-		vconcat(image2, image1, res);
-		imwrite(output_fix, res);
-		return;
-	}
-	else {
-		cout << endl;
-		cout << "=================================" << endl;
-		cout << "           是滚动字幕" << endl;
-		cout << "=================================" << endl;
-	}
+	///*==========判断是否为滚动字幕===========*/
+	//if (vec.size() == 0 || vec[0].second < 60) {
+	//	//根据相似点匹配数量进行判断
+	//	cout << endl;
+	//	cout << "=================================" << endl;
+	//	cout << "           不是滚动字幕" << endl;
+	//	cout << "=================================" << endl;
+	//	Mat res;
+	//	vconcat(image2, image1, res);
+	//	imwrite(output_fix, res);
+	//	return;
+	//}
+	//else {
+	//	cout << endl;
+	//	cout << "=================================" << endl;
+	//	cout << "           是滚动字幕" << endl;
+	//	cout << "=================================" << endl;
+	//}
 
 	//图像配准
 	/*透视变换矩阵:
@@ -252,15 +252,15 @@ void mystitch(string left, string right, Rect roi, bool processed = false) {
 
 
 int main(int argc, char** argv) {
-	{
-		//测试1：滚动字幕
-		string left = "Sample1/016660.jpg";//height: 576 width: 720
-		string right = "Sample1/016665.jpg";//height: 576 width: 720
+	//{
+	//	//测试1：滚动字幕
+	//	string left = "Sample1/016660.jpg";//height: 576 width: 720
+	//	string right = "Sample1/016665.jpg";//height: 576 width: 720
 
-		Rect label(165, 520, 550, 50);//滚动字幕，sample1  [x y width height]
-		mystitch(left, right, label);//181 个 goog_matches
+	//	Rect label(165, 520, 550, 50);//滚动字幕，sample1  [x y width height]
+	//	mystitch(left, right, label);//181 个 goog_matches
 
-	}
+	//}
 	//{
 	//	//测试2：固定字幕
 	//	string left = "mysample/202405010251.png";//height: 378 width: 720
@@ -309,6 +309,50 @@ int main(int argc, char** argv) {
 	//	Rect label(90, 376, 400, 24);//固定字幕，sample2
 	//	
 	//	mystitch(left, right, label);
+	//}
+
+	//{
+	//	//Sample1
+	//	// 016660.jpg - 016908.jpg
+	//	int count = 16660;
+	//	string left = "Sample1/0" + to_string(count) + ".jpg";//height: 576 width: 720
+	//	count += 8;
+	//	string right = "Sample1/0" + to_string(count) + ".jpg";//height: 576 width: 720
+	//	count += 40;
+
+	//	Rect label(165, 520, 530, 50);//滚动字幕
+
+	//	mystitch(left, right, label);
+
+	//	while (count <= 16908) {
+	//		left = "result/roll.jpg";
+	//		right = "Sample1/0" + to_string(count) + ".jpg";
+	//		count += 40;
+	//		mystitch(left, right, label, true);
+	//	}
+	//	
+	//}
+	
+	//{
+	//	//Sample2
+	//	//016660.jpg - 016840.jpg
+	//	int count = 16660;
+	//	string left = "Sample2/0" + to_string(count) + ".jpg";//height: 480 width: 640
+	//	count += 30;
+	//	string right = "Sample2/0" + to_string(count) + ".jpg";//height: 480 width: 640
+	//	count += 30;
+
+	//	Rect label(150, 430, 480, 25);//滚动字幕
+
+	//	mystitch(left, right, label);
+
+	//	while (count <= 16840) {
+	//		left = "result/roll.jpg";
+	//		right = "Sample2/0" + to_string(count) + ".jpg";
+	//		count += 30;
+	//		mystitch(left, right, label, true);
+	//	}
+
 	//}
 
 	return 0;
